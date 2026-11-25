@@ -960,24 +960,51 @@ document.querySelectorAll(".gallery-item img").forEach(img => {
   });
 });
 
-closeModal.addEventListener("click", () => {
-  modal.classList.remove("active");
-  modalImage.src = "";
-});
 
-modal.addEventListener("click", event => {
-  if (event.target === modal) {
+document.addEventListener("DOMContentLoaded", function () {
+
+  const modal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+  const closeModal = document.getElementById("closeModal");
+
+  const galleryImages = document.querySelectorAll(".gallery-item img");
+
+  if (!modal || !modalImage || !closeModal) {
+    console.error("Lightbox HTML elements missing!");
+    return;
+  }
+
+  galleryImages.forEach(img => {
+    img.style.cursor = "zoom-in";
+
+    img.addEventListener("click", function () {
+      modalImage.src = this.src;
+      modalImage.alt = this.alt;
+      modal.classList.add("active");
+    });
+  });
+
+  closeModal.addEventListener("click", function () {
     modal.classList.remove("active");
     modalImage.src = "";
-  }
+  });
+
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      modal.classList.remove("active");
+      modalImage.src = "";
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      modal.classList.remove("active");
+      modalImage.src = "";
+    }
+  });
+
 });
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    modal.classList.remove("active");
-    modalImage.src = "";
-  }
-});
 
 </script>
 
