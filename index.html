@@ -440,6 +440,52 @@ footer span {
   transform: translateY(0);
 }
 
+/* PROJECT SCREENSHOT GALLERY */
+
+.gallery-title {
+  margin: 35px 0 18px;
+  color: #38bdf8;
+  font-size: 21px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.gallery-item {
+  background: #080d18;
+  border: 1px solid rgba(56,189,248,.25);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  display: block;
+  background: #050914;
+  transition: .3s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+.gallery-item p {
+  padding: 12px;
+  color: #38bdf8;
+  font-size: 14px;
+}
+
+@media(max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media(max-width: 768px) {
   .menu-btn { display: block; }
 
@@ -700,6 +746,36 @@ footer span {
           <span>Documented Assessment</span>
         </div>
       </div>
+
+<h3 class="gallery-title">Project Screenshots & Evidence</h3>
+
+<div class="gallery-grid">
+
+  <div class="gallery-item">
+    <img src="assets/screenshots/01-connectivity.png"
+         alt="Lab Connectivity Evidence">
+    <p>01. Lab Connectivity</p>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/screenshots/02-port-scan.png"
+         alt="Nmap Port Scan Evidence">
+    <p>02. Nmap Port Scanning</p>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/screenshots/03-legacy-services.png"
+         alt="Legacy Services Evidence">
+    <p>03. Legacy Services Analysis</p>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/screenshots/04-web-database.png"
+         alt="Web and Database Findings">
+    <p>04. Web & Database Findings</p>
+  </div>
+
+</div>
 
       <div class="tags">
         <span>Kali Linux</span>
