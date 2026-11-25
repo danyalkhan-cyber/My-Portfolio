@@ -522,6 +522,43 @@ footer span {
   section { padding: 70px 0; }
   .hero h1 { font-size: 45px; }
 }
+  
+/* SCREENSHOT LIGHTBOX */
+
+.image-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,.94);
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.image-modal.active {
+  display: flex;
+}
+
+.image-modal img {
+  max-width: 95%;
+  max-height: 85vh;
+  object-fit: contain;
+  border: 1px solid #38bdf8;
+  border-radius: 8px;
+}
+
+#closeModal {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  font-size: 40px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -908,7 +945,46 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll(".reveal").forEach(element => {
   observer.observe(element);
 });
+  
+const modal = document.getElementById("imageModal");
+const modalImage = document.getElementById("modalImage");
+const closeModal = document.getElementById("closeModal");
+
+document.querySelectorAll(".gallery-item img").forEach(img => {
+  img.style.cursor = "zoom-in";
+
+  img.addEventListener("click", () => {
+    modalImage.src = img.src;
+    modalImage.alt = img.alt;
+    modal.classList.add("active");
+  });
+});
+
+closeModal.addEventListener("click", () => {
+  modal.classList.remove("active");
+  modalImage.src = "";
+});
+
+modal.addEventListener("click", event => {
+  if (event.target === modal) {
+    modal.classList.remove("active");
+    modalImage.src = "";
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    modal.classList.remove("active");
+    modalImage.src = "";
+  }
+});
+
 </script>
+
+<div id="imageModal" class="image-modal">
+  <button id="closeModal" aria-label="Close preview">&times;</button>
+  <img id="modalImage" src="" alt="Project screenshot preview">
+</div>
 
 </body>
 </html>
